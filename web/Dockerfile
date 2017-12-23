@@ -11,8 +11,6 @@ ENV PYTHONUNBUFFERED 1
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD [ "python", "/web/manage.py", "runserver"]
-
 # For more control, you can copy and build manually
 # FROM golang:latest 
 # LABEL Name=docker-django Version=0.0.1 

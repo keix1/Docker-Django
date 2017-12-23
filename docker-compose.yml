@@ -3,6 +3,7 @@ version: '3'
 services:
   db:
     image: postgres
+
   web:
     build: ./web/
     command: python3 manage.py runserver 0.0.0.0:8000
@@ -11,4 +12,22 @@ services:
     ports:
       - "8000:8000"
     depends_on:
+      - elasticsearch
       - db
+
+  elasticsearch:
+    image: elasticsearch:5
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./es_data/:/usr/share/elasticsearch/data/
+      
+  kibana:
+    image: kibana:5
+    ports:
+      - "5601:5601"
+    links:
+      - elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
