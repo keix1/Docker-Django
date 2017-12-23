@@ -1,6 +1,7 @@
 version: '3'
 
 services:
+
   db:
     image: postgres
 
@@ -8,13 +9,13 @@ services:
     build: ./web/
     command: python3 manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./web/:/web/
+      - ./web:/code
     ports:
       - "8000:8000"
     depends_on:
       - elasticsearch
       - db
-
+    
   elasticsearch:
     image: elasticsearch:5
     ports:
@@ -22,7 +23,7 @@ services:
       - "9300:9300"
     volumes:
       - ./es_data/:/usr/share/elasticsearch/data/
-      
+
   kibana:
     image: kibana:5
     ports:
