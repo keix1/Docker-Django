@@ -6,8 +6,5 @@
 es_data/
 __pycache__
 staticfiles
-local_settings.py
 db.sqlite3
-*.py[co]
-__pycache__
 .DS_Store
